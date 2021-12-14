@@ -1,1 +1,1 @@
-# inspektor-policy
+# inspektor-polic
