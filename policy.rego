@@ -13,16 +13,17 @@
 #  limitations under the License.
 
 package inspektor.resource.acl
+import future.keywords.in
 
 role_permission := {
 	"dev": [{"postgres-prod": {
-		"read": {"rows": 1},
-		"update": {"rows": 1},
+		"insert": {"inspektor": false},
+		"update": {"inspektor": false},
 		"protected_fields": {"inspektor": {"public.data_sources.side_car_token"}},
 	}}],
 	"admin": [{"postgres-prod": {
-		"read": {"rows": 1},
-		"update": {"rows": 1},
+		"insert": {"inspektor": false},
+		"update": {"inspektor": false},
 		"protected_fields": {"inspektor": {"public.data_sources.side_car_token"}},
 	}}],
 }
@@ -31,6 +32,10 @@ default allow = false
 
 default protected_columns = []
 
+default insert = false
+
+default update = false
+
 allow {
 	resources[_][input.data_source]
 }
@@ -38,6 +43,15 @@ allow {
 protected_columns = intersection(cs) {
 	cs := {columns | columns := resources[_][input.data_source].protected_fields[input.db_name]} # builds the set of sets
 }
+
+insert {
+  true in [ aggs | aggs := resources[_][input.data_source].insert[input.db_name]]
+} 
+
+update {
+  true in [ updates | updates := resources[_][input.data_source].update[input.db_name]]
+}
+
 
 resources[resource] {
 	resource = role_permission[input.groups[_]][_]
