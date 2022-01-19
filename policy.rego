@@ -19,12 +19,12 @@ role_permission := {
 	"dev": [{"postgres-prod": {
 		"insert": {"inspektor": false},
 		"update": {"inspektor": false},
-		"protected_fields": {"inspektor": {"public.data_sources.side_car_token"}},
+		"protected_fields": {"postgres": {"public.data_sources.side_car_token", "public.customer.email"}},
 	}}],
 	"admin": [{"postgres-prod": {
 		"insert": {"inspektor": false},
 		"update": {"inspektor": false},
-		"protected_fields": {"inspektor": {"public.data_sources.side_car_token"}},
+		"protected_fields": {"postgres": {"public.data_sources.side_car_token"}},
 	}}],
 }
 
