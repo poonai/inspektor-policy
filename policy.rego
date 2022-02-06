@@ -4,7 +4,7 @@
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
 #  
-    #  http://www.apache.org/licenses/LICENSE-2.0
+#  http://www.apache.org/licenses/LICENSE-2.0
 #  
 #  Unless required by applicable law or agreed to in writing, software
 #  distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,45 +13,33 @@
 #  limitations under the License.
 
 package inspektor.resource.acl
-import future.keywords.in
-
-role_permission := {
-	"dev": [{"postgres-prod": {
-		"insert": {"inspektor": false},
-		"update": {"inspektor": false},
-		"protected_fields": {"postgres": {"public.data_sources.side_car_token", "public.customer.email"}},
-	}}],
-	"admin": [{"postgres-prod": {
-		"insert": {"inspektor": false},
-		"update": {"inspektor": false},
-		"protected_fields": {"postgres": {"public.data_sources.side_car_token"}},
-	}}],
-}
 
 default allow = false
 
-default protected_columns = []
+default protected_attributes = []
 
-default insert = false
+default allowed_attributes = []
 
-default update = false
+role_permission := {"support": [{"postgres-prod": {
+	"insert": {"allowed": true, "allowed_attributes": {"postgres.public.kits"}},
+	"update": {"allowed": false},
+	"copy": {"allowed": true},
+	"view": {"allowed": true, "protected_attributes": {"postgres.public.kids", "prod"}},
+}}]}
 
 allow {
-	resources[_][input.data_source]
+	permission.allowed
 }
 
-protected_columns = intersection(cs) {
-	cs := {columns | columns := resources[_][input.data_source].protected_fields[input.db_name]} # builds the set of sets
+allowed_attributes = intersection(attributes) {
+	attributes := {attribute | attribute := permission.allowed_attributes}
 }
 
-insert {
-  true in [ aggs | aggs := resources[_][input.data_source].insert[input.db_name]]
-} 
-
-update {
-  true in [ updates | updates := resources[_][input.data_source].update[input.db_name]]
+protected_attributes = intersection(attributes) {
+	attributes := {attributes | attributes := permission.protected_attributes}
 }
 
+permission = resources[_][input.datasource][input.action]
 
 resources[resource] {
 	resource = role_permission[input.groups[_]][_]
