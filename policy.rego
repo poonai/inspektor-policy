@@ -20,7 +20,7 @@ default protected_attributes = []
 
 default allowed_attributes = []
 
-role_permission := {"support": [{"postgres-prod": {
+role_permission := {"admin": [{"postgres-prod": {
 	"insert": {"allowed": false, "allowed_attributes": {"postgres.public.kits"}},
 	"update": {"allowed": false},
 	"copy": {"allowed": false},
