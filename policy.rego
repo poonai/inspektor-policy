@@ -21,10 +21,10 @@ default protected_attributes = []
 default allowed_attributes = []
 
 role_permission := {"support": [{"postgres-prod": {
-	"insert": {"allowed": true, "allowed_attributes": {"postgres.public.kits"}},
+	"insert": {"allowed": false, "allowed_attributes": {"postgres.public.kits"}},
 	"update": {"allowed": false},
-	"copy": {"allowed": true},
-	"view": {"allowed": true, "protected_attributes": {"postgres.public.kids", "prod"}},
+	"copy": {"allowed": false},
+	"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.address"}},
 }}]}
 
 allow {
