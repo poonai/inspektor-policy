@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 13.5 (Debian 13.5-1.pgdg110+1)
--- Dumped by pg_dump version 13.6 (Ubuntu 13.6-1.pgdg20.04+1)
+-- Dumped by pg_dump version 13.5 (Ubuntu 13.5-0ubuntu0.21.10.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -47637,6 +47637,7 @@ COPY public.roles (id, created_at, updated_at, deleted_at, object_id, name, type
 
 COPY public.sessions (id, created_at, updated_at, deleted_at, object_id, user_id, meta) FROM stdin;
 1	2022-02-12 09:26:57.830688+00	2022-02-12 09:26:57.830688+00	\N	1	1	{"type": "postgres", "postgresPassword": "d8c1e29d7e58be", "postgresUsername": "fragrant-sun"}
+2	2022-02-15 07:36:32.658411+00	2022-02-15 07:36:32.658411+00	\N	1	2	{"type": "postgres", "postgresPassword": "f3535f770dadb1", "postgresUsername": "divine-butterfly"}
 \.
 
 
@@ -47772,7 +47773,7 @@ SELECT pg_catalog.setval('public.roles_id_seq', 4, true);
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 1, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 2, true);
 
 
 --
