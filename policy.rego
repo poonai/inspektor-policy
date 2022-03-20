@@ -28,7 +28,7 @@ role_permission := {
 		"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.address"}},
 	}}],
 	"dev": [{"postgres-prod": {
-		"insert": {"allowed": false, "allowed_attributes": {"postgres.public.kits"}},
+		"insert": {"allowed": true, "allowed_attributes": {"postgres.public.actor.first_name"}},
 		"update": {"allowed": false},
 		"copy": {"allowed": true, "allowed_attributes": {"postgres.public.actor"}},
 		"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.address"}},
