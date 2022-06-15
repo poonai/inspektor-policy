@@ -47,7 +47,7 @@ protected_attributes = intersection(attributes) {
 	attributes := {attributes | attributes := permission.protected_attributes}
 }
 
-permission = resources[_][input.datasource][input.action]
+permission = resources[_][input.datasource][input.action[_]]
 
 resources[resource] {
 	resource = role_permission[input.groups[_]][_]
