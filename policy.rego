@@ -27,12 +27,6 @@ role_permission := {
 		"copy": {"allowed": false},
 		"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.address"}},
 	}}],
-	"dev": [{"postgres-prod": {
-		"insert": {"allowed": true, "allowed_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.last_name"}},
-		"update": {"allowed": false},
-		"copy": {"allowed": true, "allowed_attributes": {"postgres.public.actor"}},
-		"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.address"}},
-	}}],
 }
 
 allow {
@@ -47,7 +41,7 @@ protected_attributes = intersection(attributes) {
 	attributes := {attributes | attributes := permission.protected_attributes}
 }
 
-permission = resources[_][input.datasource][input.action[_]]
+permission = resources[_][input.datasource][input.action]
 
 resources[resource] {
 	resource = role_permission[input.groups[_]][_]
