@@ -25,7 +25,7 @@ role_permission := {
 		"insert": {"allowed": false, "allowed_attributes": {"postgres.public.kits"}},
 		"update": {"allowed": true, "allowed_attributes": {"postgres.public.actor.last_name"}},
 		"copy": {"allowed": false},
-		"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.last_name", "postgres.public.actor.address"}},
+		"view": {"allowed": true, "protected_attributes": {"postgres.public.actor.first_name", "postgres.public.actor.address"}},
 	}}],
 }
 
